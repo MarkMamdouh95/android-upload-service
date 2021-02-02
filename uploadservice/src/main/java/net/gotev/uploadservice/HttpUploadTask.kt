@@ -49,6 +49,7 @@ abstract class HttpUploadTask : UploadTask(), HttpRequest.RequestBodyDelegate,
             .setTotalBodyBytes(totalBytes, httpParams.usesFixedLengthStreamingMode)
             .getResponse(this, this)
 
+        response.httpMethod = httpParams.method
         UploadServiceLogger.debug(javaClass.simpleName, params.id) {
             "Server response: code ${response.code}, body ${response.bodyString}"
         }

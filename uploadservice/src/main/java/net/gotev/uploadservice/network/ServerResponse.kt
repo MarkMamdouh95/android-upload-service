@@ -8,27 +8,31 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 data class ServerResponse(
     /**
-     * server response response code. If you are implementing a Non-HTTP
-     * protocol, set this to 200 to inform that the task has been completed
-     * successfully. Integer values lower than 200 or greater that 299 indicates
-     * error response from server.
-     */
-    val code: Int,
+ * server response response code. If you are implementing a Non-HTTP
+ * protocol, set this to 200 to inform that the task has been completed
+ * successfully. Integer values lower than 200 or greater that 299 indicates
+ * error response from server.
+ */
+val code: Int,
 
     /**
-     * server response body.
-     * If your server responds with a string, you can get it with
-     * [ServerResponse.bodyString].
-     * If the string is a JSON, you can parse it using a library such as org.json
-     * (embedded in Android) or google's gson
-     * If your server does not return anything, set this to empty array.
-     */
-    val body: ByteArray,
+ * server response body.
+ * If your server responds with a string, you can get it with
+ * [ServerResponse.bodyString].
+ * If the string is a JSON, you can parse it using a library such as org.json
+ * (embedded in Android) or google's gson
+ * If your server does not return anything, set this to empty array.
+ */
+val body: ByteArray,
 
     /**
-     * server response headers
+    * server response headers
+    */
+   val headers: LinkedHashMap<String, String>,
+    /**
+     * http method such as POST, PUT, .. and so on
      */
-    val headers: LinkedHashMap<String, String>
+    var httpMethod: String
 ) : Parcelable, Serializable {
 
     /**
@@ -50,7 +54,8 @@ data class ServerResponse(
             return ServerResponse(
                 code = 200,
                 body = ByteArray(1),
-                headers = LinkedHashMap()
+                headers = LinkedHashMap(),
+                httpMethod = ""
             )
         }
     }
