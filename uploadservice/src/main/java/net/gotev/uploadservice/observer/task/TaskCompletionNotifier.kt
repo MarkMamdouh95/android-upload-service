@@ -1,6 +1,7 @@
 package net.gotev.uploadservice.observer.task
 
 import net.gotev.uploadservice.UploadService
+import net.gotev.uploadservice.UploadThrowable
 import net.gotev.uploadservice.data.UploadInfo
 import net.gotev.uploadservice.data.UploadNotificationConfig
 import net.gotev.uploadservice.network.ServerResponse
@@ -32,7 +33,7 @@ class TaskCompletionNotifier(private val service: UploadService) : UploadTaskObs
         info: UploadInfo,
         notificationId: Int,
         notificationConfig: UploadNotificationConfig,
-        exception: Throwable
+        exception: UploadThrowable
     ) {
     }
 

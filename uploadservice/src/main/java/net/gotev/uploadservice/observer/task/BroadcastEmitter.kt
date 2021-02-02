@@ -1,6 +1,7 @@
 package net.gotev.uploadservice.observer.task
 
 import android.content.Context
+import net.gotev.uploadservice.UploadThrowable
 import net.gotev.uploadservice.data.BroadcastData
 import net.gotev.uploadservice.data.UploadInfo
 import net.gotev.uploadservice.data.UploadNotificationConfig
@@ -49,7 +50,7 @@ class BroadcastEmitter(private val context: Context) : UploadTaskObserver {
         info: UploadInfo,
         notificationId: Int,
         notificationConfig: UploadNotificationConfig,
-        exception: Throwable
+        exception: UploadThrowable
     ) {
         send(BroadcastData(UploadStatus.Error, info, null, exception))
     }

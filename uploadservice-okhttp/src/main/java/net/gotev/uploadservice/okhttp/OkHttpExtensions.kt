@@ -21,4 +21,4 @@ private fun Response.headersHashMap() = LinkedHashMap(headers.toMap())
 
 private fun Response.bodyBytes() = body?.bytes() ?: ByteArray(0)
 
-internal fun Response.asServerResponse() = ServerResponse(code, bodyBytes(), headersHashMap())
+internal fun Response.asServerResponse() = ServerResponse(code, bodyBytes(), headersHashMap(), "")

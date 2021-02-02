@@ -1,6 +1,7 @@
 package net.gotev.uploadservice.observer.request
 
 import android.content.Context
+import net.gotev.uploadservice.UploadThrowable
 import net.gotev.uploadservice.data.UploadInfo
 import net.gotev.uploadservice.network.ServerResponse
 
@@ -29,7 +30,7 @@ interface RequestObserverDelegate {
      * @param uploadInfo upload status information
      * @param exception exception that caused the error
      */
-    fun onError(context: Context, uploadInfo: UploadInfo, exception: Throwable)
+    fun onError(context: Context, uploadInfo: UploadInfo, exception: UploadThrowable)
 
     /**
      * Called when the upload is completed wither with success or error.

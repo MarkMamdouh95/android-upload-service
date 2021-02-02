@@ -7,6 +7,7 @@ import androidx.core.app.NotificationCompat
 import kotlinx.android.parcel.Parcelize
 import net.gotev.uploadservice.UploadService
 import net.gotev.uploadservice.UploadServiceConfig
+import net.gotev.uploadservice.UploadThrowable
 import net.gotev.uploadservice.data.UploadInfo
 import net.gotev.uploadservice.data.UploadNotificationConfig
 import net.gotev.uploadservice.data.UploadNotificationStatusConfig
@@ -101,7 +102,7 @@ abstract class AbstractSingleNotificationHandler(
         info: UploadInfo,
         notificationId: Int,
         notificationConfig: UploadNotificationConfig,
-        exception: Throwable
+        exception: UploadThrowable
     ) {
         if (exception is UserCancelledUploadException) {
             updateTask(TaskStatus.Cancelled, info, notificationConfig.cancelled)

@@ -14,8 +14,8 @@ import java.util.Locale
  * @param context application context
  * @param serverUrl URL of the server side script that handles the request
  */
-abstract class HttpUploadRequest<B : HttpUploadRequest<B>>(context: Context, serverUrl: String) :
-    UploadRequest<B>(context, serverUrl) {
+abstract class HttpUploadRequest<B : HttpUploadRequest<B>>(context: Context, serverUrl: String, httpMethod: String) :
+    UploadRequest<B>(context, serverUrl, httpMethod) {
 
     protected val httpParams = HttpUploadTaskParameters()
 
