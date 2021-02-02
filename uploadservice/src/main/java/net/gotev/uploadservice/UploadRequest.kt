@@ -26,7 +26,7 @@ abstract class UploadRequest<B : UploadRequest<B>>
  * @throws IllegalArgumentException if one or more arguments are not valid
  */
 @Throws(IllegalArgumentException::class)
-constructor(protected val context: Context, protected var serverUrl: String) : Persistable {
+constructor(protected val context: Context, protected var serverUrl: String, protected val httpMethod: String) : Persistable {
 
     private var uploadId = UUID.randomUUID().toString()
     protected var maxRetries = UploadServiceConfig.retryPolicy.defaultMaxRetries
@@ -47,6 +47,7 @@ constructor(protected val context: Context, protected var serverUrl: String) : P
 
     private val uploadTaskParameters: UploadTaskParameters
         get() = UploadTaskParameters(
+            httpMethod = httpMethod,
             taskClass = taskClass.name,
             id = uploadId,
             serverUrl = serverUrl,

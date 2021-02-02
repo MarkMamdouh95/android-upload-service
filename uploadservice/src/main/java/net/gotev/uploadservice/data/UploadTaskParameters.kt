@@ -7,6 +7,7 @@ import net.gotev.uploadservice.persistence.PersistableData
 
 @Parcelize
 data class UploadTaskParameters(
+    val httpMethod: String,
     val taskClass: String,
     val id: String,
     val serverUrl: String,
@@ -16,6 +17,7 @@ data class UploadTaskParameters(
     val additionalParameters: PersistableData
 ) : Parcelable, Persistable {
     override fun toPersistableData() = PersistableData().apply {
+        putString(CodingKeys.httpMethod, httpMethod)
         putString(CodingKeys.taskClass, taskClass)
         putString(CodingKeys.id, id)
         putString(CodingKeys.serverUrl, serverUrl)
@@ -27,6 +29,7 @@ data class UploadTaskParameters(
 
     companion object : Persistable.Creator<UploadTaskParameters> {
         private object CodingKeys {
+            const val httpMethod = "httpMethod"
             const val taskClass = "taskClass"
             const val id = "id"
             const val serverUrl = "serverUrl"
@@ -37,6 +40,7 @@ data class UploadTaskParameters(
         }
 
         override fun createFromPersistableData(data: PersistableData) = UploadTaskParameters(
+            httpMethod = data.getString(CodingKeys.httpMethod),
             taskClass = data.getString(CodingKeys.taskClass),
             id = data.getString(CodingKeys.id),
             serverUrl = data.getString(CodingKeys.serverUrl),

@@ -9,7 +9,7 @@ import net.gotev.uploadservice.persistence.PersistableData
 class CreateUploadRequest private constructor(
     context: Context,
     private val params: UploadTaskParameters
-) : UploadRequest<CreateUploadRequest>(context, "https://empty") {
+) : UploadRequest<CreateUploadRequest>(context, "https://empty", params.httpMethod) {
 
     companion object {
         /**

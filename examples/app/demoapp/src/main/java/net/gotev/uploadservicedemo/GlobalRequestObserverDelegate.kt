@@ -20,7 +20,7 @@ class GlobalRequestObserverDelegate : RequestObserverDelegate {
         Log.e("RECEIVER", "Success: $serverResponse")
     }
 
-    override fun onError(context: Context, uploadInfo: UploadInfo, exception: Throwable) {
+    override fun onError(context: Context, uploadInfo: UploadInfo, exception: UploadThrowable) {
         when (exception) {
             is UserCancelledUploadException -> {
                 Log.e("RECEIVER", "Error, user cancelled upload: $uploadInfo")

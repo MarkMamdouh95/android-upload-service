@@ -13,8 +13,8 @@ import net.gotev.uploadservice.data.UploadFile
  * @param serverUrl URL of the server side script that will handle the multipart form upload.
  * E.g.: http://www.yourcompany.com/your/script
  */
-class MultipartUploadRequest(context: Context, serverUrl: String) :
-    HttpUploadRequest<MultipartUploadRequest>(context, serverUrl) {
+class MultipartUploadRequest(context: Context, serverUrl: String, httpMethod: String) :
+    HttpUploadRequest<MultipartUploadRequest>(context, serverUrl, httpMethod) {
 
     override val taskClass: Class<out UploadTask>
         get() = MultipartUploadTask::class.java

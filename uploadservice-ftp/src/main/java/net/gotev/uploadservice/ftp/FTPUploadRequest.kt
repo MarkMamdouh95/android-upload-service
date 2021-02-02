@@ -13,8 +13,8 @@ import net.gotev.uploadservice.data.UploadFile
  * @param serverUrl server IP address or hostname
  * @param port FTP port
  */
-class FTPUploadRequest(context: Context, serverUrl: String, port: Int) :
-    UploadRequest<FTPUploadRequest>(context, serverUrl) {
+class FTPUploadRequest(context: Context, serverUrl: String, port: Int, httpMethod: String) :
+    UploadRequest<FTPUploadRequest>(context, serverUrl, httpMethod) {
     protected val ftpParams = FTPUploadTaskParameters(port)
 
     override val taskClass: Class<out UploadTask>
