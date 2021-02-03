@@ -16,8 +16,8 @@ import java.io.IOException
  * @param serverUrl URL of the server side script that will handle the multipart form upload.
  * E.g.: http://www.yourcompany.com/your/script
  */
-class BinaryUploadRequest(context: Context, serverUrl: String) :
-    HttpUploadRequest<BinaryUploadRequest>(context, serverUrl) {
+class BinaryUploadRequest(context: Context, serverUrl: String, httpMethod: String) :
+    HttpUploadRequest<BinaryUploadRequest>(context, serverUrl, httpMethod) {
 
     override val taskClass: Class<out UploadTask>
         get() = BinaryUploadTask::class.java

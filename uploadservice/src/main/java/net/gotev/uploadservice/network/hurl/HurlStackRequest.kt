@@ -112,7 +112,7 @@ class HurlStackRequest(
             delegate.onWriteRequestBody(it)
         }
 
-        ServerResponse(connection.responseCode, responseBody, responseHeaders)
+        ServerResponse(connection.responseCode, responseBody, responseHeaders, connection.requestMethod)
     }
 
     override fun close() {

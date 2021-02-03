@@ -6,6 +6,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.IBinder
 import android.os.PowerManager
+import androidx.core.app.NotificationCompat
 import net.gotev.uploadservice.UploadServiceConfig.threadPool
 import net.gotev.uploadservice.extensions.acquirePartialWakeLock
 import net.gotev.uploadservice.extensions.getUploadTask
@@ -191,6 +192,14 @@ class UploadService : Service() {
 
         wakeLock = acquirePartialWakeLock(wakeLock, TAG)
         notificationActionsObserver.register()
+
+        val notification = NotificationCompat.Builder(this, UploadServiceConfig.defaultNotificationChannel!!)
+            .setSmallIcon(android.R.drawable.ic_menu_upload)
+            .setOngoing(true)
+            .setGroup(UploadServiceConfig.namespace)
+            .build()
+
+        startForeground(UPLOAD_NOTIFICATION_BASE_ID, notification)
     }
 
     override fun onBind(intent: Intent): IBinder? {
@@ -205,8 +214,8 @@ class UploadService : Service() {
         val taskCreationParameters = intent.getUploadTaskCreationParameters()
             ?: return shutdownIfThereArentAnyActiveTasks()
 
-        if (uploadTasksMap.containsKey(taskCreationParameters.second.id)) {
-            UploadServiceLogger.error(TAG, taskCreationParameters.second.id) {
+        if (uploadTasksMap.containsKey(taskCreationParameters.params.id)) {
+            UploadServiceLogger.error(TAG, taskCreationParameters.params.id) {
                 "Preventing upload! An upload with the same ID is already in progress. " +
                     "Every upload must have unique ID. Please check your code and fix it!"
             }
@@ -220,7 +229,7 @@ class UploadService : Service() {
         val currentTask = getUploadTask(
             creationParameters = taskCreationParameters,
             notificationId = UPLOAD_NOTIFICATION_BASE_ID + notificationIncrementalId,
-            observers = *taskObservers
+            observers = taskObservers
         ) ?: return shutdownIfThereArentAnyActiveTasks()
 
         clearIdleTimer()

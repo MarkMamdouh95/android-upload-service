@@ -10,6 +10,7 @@ import androidx.core.app.NotificationCompat
 import net.gotev.uploadservice.UploadService
 import net.gotev.uploadservice.UploadServiceConfig.namespace
 import net.gotev.uploadservice.UploadServiceConfig.placeholdersProcessor
+import net.gotev.uploadservice.UploadThrowable
 import net.gotev.uploadservice.data.UploadInfo
 import net.gotev.uploadservice.data.UploadNotificationConfig
 import net.gotev.uploadservice.data.UploadNotificationStatusConfig
@@ -149,7 +150,7 @@ class NotificationHandler(private val service: UploadService) : UploadTaskObserv
         info: UploadInfo,
         notificationId: Int,
         notificationConfig: UploadNotificationConfig,
-        exception: Throwable
+        exception: UploadThrowable
     ) {
         val statusConfig = if (exception is UserCancelledUploadException) {
             notificationConfig.cancelled
