@@ -4,6 +4,7 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
+import android.os.Build
 import android.os.Parcelable
 import androidx.annotation.ColorInt
 import androidx.annotation.DrawableRes
@@ -72,11 +73,12 @@ data class UploadNotificationStatusConfig @JvmOverloads constructor(
     val onDismissed: PendingIntent? = null
 ) : Parcelable {
     fun getClickIntent(context: Context): PendingIntent {
+        val intentFlags = if (Build.VERSION.SDK_INT > 30) PendingIntent.FLAG_IMMUTABLE else PendingIntent.FLAG_UPDATE_CURRENT
         return clickIntent ?: PendingIntent.getBroadcast(
             context,
             0,
             Intent(),
-            PendingIntent.FLAG_UPDATE_CURRENT
+            intentFlags
         )
     }
 }

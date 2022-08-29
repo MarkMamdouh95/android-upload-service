@@ -47,8 +47,9 @@ public class BaseActivity extends AppCompatActivity {
     }
 
     protected UploadNotificationConfig getNotificationConfig(final String uploadId, @StringRes int title) {
+        val intentFlags = if (Build.VERSION.SDK_INT > 30) PendingIntent.FLAG_IMMUTABLE else PendingIntent.FLAG_UPDATE_CURRENT
         PendingIntent clickIntent = PendingIntent.getActivity(
-                this, 1, new Intent(this, MainActivity.class), PendingIntent.FLAG_UPDATE_CURRENT);
+                this, 1, new Intent(this, MainActivity.class), intentFlags);
 
         final boolean autoClear = false;
         final Bitmap largeIcon = null;

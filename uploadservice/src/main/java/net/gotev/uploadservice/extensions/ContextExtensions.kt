@@ -121,13 +121,15 @@ fun Context.getNotificationActionIntent(
         putExtra(uploadIdKey, uploadId)
     }
 
+    val intentFlags = if (Build.VERSION.SDK_INT > 30) PendingIntent.FLAG_IMMUTABLE else PendingIntent.FLAG_ONE_SHOT
+
     return PendingIntent.getBroadcast(
         this,
         // this is to prevent duplicate PendingIntent request codes which can cause cancelling
         // the wrong upload
         uploadId.hashCode(),
         intent,
-        PendingIntent.FLAG_ONE_SHOT
+        intentFlags
     )
 }
 
