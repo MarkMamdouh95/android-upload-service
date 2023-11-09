@@ -89,6 +89,8 @@ class UploadService : Service() {
                 )
             )
         }
+
+        fun clearTaskList() = uploadTasksMap.clear()
     }
 
     private var wakeLock: PowerManager.WakeLock? = null
@@ -253,7 +255,7 @@ class UploadService : Service() {
 
         wakeLock.safeRelease()
 
-        uploadTasksMap.clear()
+        clearTaskList()
 
         UploadServiceLogger.debug(TAG, NA) { "UploadService destroyed" }
     }
